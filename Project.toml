@@ -1,0 +1,4 @@
+name = "AdventOfCode"
+uuid = "4628aeb4-3e50-4858-9e97-eb94d3f396db"
+authors = ["Joshua Leger <legermjoshua@gmail.com>"]
+version = "0.1.0"
