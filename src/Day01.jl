@@ -1,20 +1,12 @@
 module Day01
 
+using DelimitedFiles
+
 export puzzle1, puzzle2
 
 function puzzle1()
-    lines = readlines("data/day_01.txt")
-    list1 = sort(parselist1(lines))
-    list2 = sort(parselist2(lines))
-    getdistances(list1, list2)
-end
-
-function parselist1(lines)
-    map(s -> parse(Int, s[1:5]), lines)
-end
-
-function parselist2(lines)
-    map(s -> parse(Int, s[9:13]), lines)
+    lists = readdlm("data/day_01.txt", Int)
+    getdistances(sort(lists[:,1]), sort(lists[:,2]))
 end
 
 function getdistances(list1, list2)
@@ -26,26 +18,24 @@ function getdistances(list1, list2)
 end
 
 function puzzle2()
-    lines = readlines("data/day_01.txt")
-    list1 = sort(parselist1(lines))
-    list2 = sort(parselist2(lines))
-    getsimilaritytotal(list1, list2)
+    lists = readdlm("data/day_01.txt", Int)
+    list1 = lists[:,1]
+    list2occurences = listtooccurencehashmap(lists[:,2])
+    getsimilaritytotal(list1, list2occurences)
 end
 
-function getsimilaritytotal(list1, list2)
+function listtooccurencehashmap(list)
+    occurences = Dict()
+    for l in list
+        occurences[l] = get(occurences, l, 0) + 1
+    end
+    occurences
+end
+
+function getsimilaritytotal(list1, list2occurences)
     total = 0
     for n in list1
-        total += n * getsimilarityscore(n, list2)
-    end
-    total
-end
-
-function getsimilarityscore(number, list)
-    total = 0
-    for n in list
-        if number == n
-            total += 1
-        end
+        total += n * get(list2occurences, n, 0)
     end
     total
 end
