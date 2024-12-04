@@ -3,8 +3,9 @@ module AdventOfCode
 include("Day01.jl")
 include("Day02.jl")
 include("Day03.jl")
+include("Day04.jl")
 
-import .Day01, .Day02, .Day03
+import .Day01, .Day02, .Day03, .Day04
 
 function main()
     println("Day 01")
@@ -16,6 +17,9 @@ function main()
     println("Day 03")
     println("  puzzle 1: $(Day03.puzzle1()) (173731097)")
     println("  puzzle 1: $(Day03.puzzle2()) (93729253)")
+    println("Day 04")
+    println("  puzzle 1: $(Day04.puzzle1()) (2406)")
+    println("  puzzle 1: $(Day04.puzzle2()) (1807)")
 end
 
 end
