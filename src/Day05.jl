@@ -69,29 +69,7 @@ function puzzle2()
 end
 
 function fixprintingorder(printing, rules)
-    newprinting = []
-    pagesleft = printing
-    while !isempty(pagesleft)
-        nextelement = findfirstelement(pagesleft, rules)
-        push!(newprinting, nextelement)
-        pagesleft = filter(p -> p != nextelement, pagesleft)
-    end
-    newprinting
-end
-
-function findfirstelement(printing, rules)
-    for i in eachindex(printing)
-        valid = true
-        for j in eachindex(printing)[i+1:end]
-            if [printing[j], printing[i]] in rules
-                valid = false
-            end
-        end
-        if valid
-            return printing[i]
-        end
-    end
-    printing[end]
+    sort(printing, lt=(a, b) -> [a, b] in rules)
 end
 
 end
