@@ -9,8 +9,9 @@ include("Day06.jl")
 include("Day07.jl")
 include("Day08.jl")
 include("Day09.jl")
+include("Day10.jl")
 
-import .Day01, .Day02, .Day03, .Day04, .Day05, .Day06, .Day07, .Day08, .Day09
+import .Day01, .Day02, .Day03, .Day04, .Day05, .Day06, .Day07, .Day08, .Day09, .Day10
 
 function main()
     println("Day 01")
@@ -40,6 +41,9 @@ function main()
     println("Day 09")
     println("  puzzle 1: $(Day09.puzzle1()) (6398608069280)")
     println("  puzzle 2: $(Day09.puzzle2()) (6427437134372)")
+    println("Day 10")
+    println("  puzzle 1: $(Day10.puzzle1()) (744)")
+    println("  puzzle 2: $(Day10.puzzle2()) (1651)")
 end
 
 end
