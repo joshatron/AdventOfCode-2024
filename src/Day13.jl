@@ -44,40 +44,13 @@ function readprizeline(line)
 end
 
 function wincost(machine)
-    bmax = inlessorequal(machine.bx, machine.prizex)
-    bs = logfindbs(machine, 0, bmax)
-    if bs == 0
-        return 0
-    else
-        as = inlessorequal(machine.ax, machine.prizex - (machine.bx * bs))
-        return bs + (as * 3)
+    a = (machine.prizex*machine.by - machine.prizey*machine.bx) ÷ (machine.ax*machine.by - machine.ay*machine.bx)
+    b = (machine.prizey*machine.ax - machine.prizex*machine.ay) ÷ (machine.ax*machine.by - machine.ay*machine.bx)
+
+    if (machine.bx * b + machine.ax * a == machine.prizex) && (machine.by * b + machine.ay * a == machine.prizey)
+        return b + (a * 3)
     end
-end
-
-function logfindbs(machine, bmin, bmax)
-    bmid = (bmax + bmin) ÷ 2
-    anum = inlessorequal(machine.ax, machine.prizex - (machine.bx * bmid))
-    anummax = inlessorequal(machine.ax, machine.prizex - (machine.bx * bmax))
-
-    if (machine.bx * bmid + machine.ax * anum == machine.prizex) && (machine.by * bmid + machine.ay * anum == machine.prizey)
-        return bmid
-    elseif bmax - bmin <= 100
-        for bs in bmax:-1:bmin
-            as = inlessorequal(machine.ax, machine.prizex - (machine.bx * bs))
-            if (machine.bx * bs + machine.ax * as == machine.prizex) && (machine.by * bs + machine.ay * as == machine.prizey)
-                return bs
-            end
-        end
-        return 0
-    elseif (machine.by * bmid + machine.ay * anum < machine.prizey) == (machine.by * bmax + machine.ay * anummax < machine.prizey)
-        return logfindbs(machine, bmin, bmid)
-    else
-        return logfindbs(machine, bmid, bmax)
-    end
-end
-
-function inlessorequal(num, target)
-    floor(Int, target / num)
+    0
 end
 
 function puzzle2()
